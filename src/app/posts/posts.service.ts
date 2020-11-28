@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<Post[]>();
-  private url = 'http://localhost:3000/api/posts'
+  private url = 'http://localhost:3000/api/posts';
 
   constructor(private http: HttpClient) {}
 
