@@ -49,9 +49,17 @@ app.get('/api/posts', (req, res, next) => {
       });
     })
     .catch(() => {
-      console.log('something went')
+      console.log('something went wrong')
     })
-
 });
+
+app.delete('/api/posts/:id', (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id })
+    .then(result => {
+      console.log(result)
+      res.status(200).json({ message: 'Post deleted!' })
+    })
+})
+
 
 module.exports = app;
