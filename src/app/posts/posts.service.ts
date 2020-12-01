@@ -34,6 +34,10 @@ export class PostsService {
     return this.postsUpdated.asObservable();
   }
 
+  getPost(id: string) {
+    return {...this.posts.find(post => post.id = id)}
+  }
+
   addPost(title: string, content: string) {
     const post: Post = { id: null, title: title, content: content };
     this.http.post<{ message: string, postId: string }>(this.url, post)
@@ -43,6 +47,10 @@ export class PostsService {
         this.postsUpdated.next([...this.posts])
         console.log(responseData.message)
       })
+  }
+
+  updatePost(id: string, title: string, content: string) {
+    const post = { id: id, title: title, content: content }
   }
 
   deletePost(postId: string) {
