@@ -35,22 +35,30 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return {...this.posts.find(post => post.id = id)}
+    return this.http.get<{_id: string, title: string, content: string}>(this.url + id);
   }
 
   addPost(title: string, content: string) {
     const post: Post = { id: null, title: title, content: content };
     this.http.post<{ message: string, postId: string }>(this.url, post)
       .subscribe((responseData) => {
-        post.id = responseData.postId
+        post.id = responseData.postId;
         this.posts.push(post);
-        this.postsUpdated.next([...this.posts])
-        console.log(responseData.message)
+        this.postsUpdated.next([...this.posts]);
+        console.log(responseData.message);
       })
   }
 
   updatePost(id: string, title: string, content: string) {
-    const post = { id: id, title: title, content: content }
+    const post: Post = { id: id, title: title, content: content }
+    this.http.put(this.url + id, post)
+      .subscribe(response => {
+        const updatedPosts = [...this.posts];
+        const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id);
+        updatedPosts[oldPostIndex] = post;
+        this.posts = updatedPosts;
+        this.postsUpdated.next([...this.posts]);
+      })
   }
 
   deletePost(postId: string) {

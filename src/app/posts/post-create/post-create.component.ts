@@ -15,7 +15,11 @@ export class PostCreateComponent implements OnInit {
   enteredContent: string;
   private mode = 'create';
   private postId: string;
-  public post: Post;
+  public post: Post = {
+    id: '',
+    title: '',
+    content: ''
+  }
 
   constructor(private postsService: PostsService, private route: ActivatedRoute) {}
 
@@ -24,7 +28,9 @@ export class PostCreateComponent implements OnInit {
       if(paramMap.has('postId')) {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
-        this.post = this.postsService.getPost(this.postId);
+        this.postsService.getPost(this.postId).subscribe(post => {
+          this.post = {id: post._id, title: post.title, content: post.content}
+        });
       } else {
         this.mode = 'create';
         this.postId = paramMap.get(null);
@@ -32,11 +38,15 @@ export class PostCreateComponent implements OnInit {
     })
   }
 
-  onAddPost(form: NgForm) {
+  onSavePost(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    this.postsService.addPost(form.value.title, form.value.content)
+    if (this.mode === 'create') {
+      this.postsService.addPost(form.value.title, form.value.content)
+    } else {
+      this.postsService.updatePost(this.postId, form.value.title, form.value.content)
+    }
     form.resetForm()
   }
 }
