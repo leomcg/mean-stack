@@ -11,4 +11,4 @@
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<p *ngIf="posts.length <= 0" class="mat-body-1">No posts found</p>
+<p *ngIf="posts.length <= 0 && !isLoading" class="mat-body-1">No posts found</p>

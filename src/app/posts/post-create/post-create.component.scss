@@ -7,3 +7,8 @@ textarea {
 mat-spinner {
   margin: auto;
 }
+
+input[type="file"] {
+  visibility: hidden;
+  margin-bottom: 16px;
+}
