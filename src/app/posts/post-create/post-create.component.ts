@@ -32,6 +32,9 @@ export class PostCreateComponent implements OnInit {
       }),
       content: new FormControl(null, {
         validators: [Validators.required]
+      }),
+      image: new FormControl(null, {
+        validators: [Validators.required]
       })
     });
 
@@ -66,5 +69,14 @@ export class PostCreateComponent implements OnInit {
       this.postsService.updatePost(this.postId, this.form.value.title, this.form.value.content)
     }
     this.form.reset()
+  }
+
+  onImagePicked($event: Event) {
+    const file = ($event.target as HTMLInputElement).files[0];
+    this.form.patchValue({ image: file });
+    this.form.get('image').updateValueAndValidity();
+    console.log(this.form)
+    console.log(file)
+
   }
 }
