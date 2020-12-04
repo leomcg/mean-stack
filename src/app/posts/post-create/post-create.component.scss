@@ -10,5 +10,12 @@ mat-spinner {
 
 input[type="file"] {
   visibility: hidden;
-  margin-bottom: 16px;
+}
+
+.image-preview {
+  height: 8rem;
+  margin: 1rem 0;
+  img {
+    height: 100%;
+  }
 }
