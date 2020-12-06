@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
   }
 })
 
-router.post('', multer(storage).single('image'), (req, res, next) => {
+router.post('', multer({storage: storage}).single('image'), (req, res, next) => { //multer will look for a single file inside an 'image' property in the req body
   const post = new Post({
     title: req.body.title,
     content: req.body.content
