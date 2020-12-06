@@ -7,6 +7,25 @@ mat-expansion-panel {
   margin: 1rem 0;
 }
 
+mat-expansion-panel-header {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.post-content {
+  font-size: 1rem;
+}
+
 mat-spinner {
   margin: auto;
+}
+
+.post-image {
+  width: 100%;
+  margin-bottom: 1rem;
+  img {
+    max-width: 100%;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.5);
+    max-height: 400px;
+  }
 }

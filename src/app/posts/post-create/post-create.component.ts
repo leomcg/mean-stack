@@ -22,7 +22,8 @@ export class PostCreateComponent implements OnInit {
   public post: Post = {
     id: '',
     title: '',
-    content: ''
+    content: '',
+    imagePath: ''
   }
 
   constructor(private postsService: PostsService, private route: ActivatedRoute) {}
@@ -48,10 +49,11 @@ export class PostCreateComponent implements OnInit {
         this.isLoading = true;
         this.postsService.getPost(this.postId).subscribe(post => {
           this.isLoading = false;
-          this.post = {id: post._id, title: post.title, content: post.content}
+          this.post = {id: post._id, title: post.title, content: post.content, imagePath: post.imagePath }
           this.form.setValue({
             title: this.post.title,
-            content: this.post.content
+            content: this.post.content,
+            image: this.post.imagePath
           });
         });
       } else {
@@ -69,7 +71,7 @@ export class PostCreateComponent implements OnInit {
     if (this.mode === 'create') {
       this.postsService.addPost(this.form.value.title, this.form.value.content, this.form.value.image)
     } else {
-      this.postsService.updatePost(this.postId, this.form.value.title, this.form.value.content)
+      this.postsService.updatePost(this.postId, this.form.value.title, this.form.value.content, this.form.value.image)
     }
     this.form.reset()
   }

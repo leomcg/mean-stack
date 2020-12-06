@@ -8,13 +8,17 @@ mat-spinner {
   margin: auto;
 }
 
+.save-post-button {
+  margin-bottom: 1rem;
+}
+
 input[type="file"] {
   visibility: hidden;
 }
 
 .image-preview {
   height: 8rem;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
   img {
     height: 100%;
   }
