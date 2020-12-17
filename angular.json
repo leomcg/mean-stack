@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "mean"
+  "defaultProject": "mean",
+  "cli": {
+    "analytics": false
+  }
 }
