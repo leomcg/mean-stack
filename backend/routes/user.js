@@ -10,6 +10,7 @@ router.post("/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
     const user = new User({
       email: req.body.email,
+      name: req.body.name,
       password: hash
     });
     user
@@ -47,13 +48,15 @@ router.post("/login", (req, res, next) => {
         });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id },
+        { email: fetchedUser.email, userName: fetchedUser.name, userId: fetchedUser._id },
         "secret_this_should_be_longer",
         { expiresIn: "1h" }
       );
       res.status(200).json({
         token: token,
-        expiresIn: 3600
+        expiresIn: 3600,
+        userName: fetchedUser.name,
+        userId: fetchedUser._id
       });
     })
     .catch(err => {

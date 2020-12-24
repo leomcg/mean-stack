@@ -25,7 +25,9 @@ export class PostsService {
                 title: post.title,
                 content: post.content,
                 id: post._id,
-                imagePath: post.imagePath
+                imagePath: post.imagePath,
+                creator: post.creator,
+                userName: post.userName
               };
             }),
             totalPosts: postData.totalPosts
@@ -43,7 +45,7 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string, title: string, content: string, imagePath: string }>(
+    return this.http.get<{ _id: string, title: string, content: string, imagePath: string, creator: string, userName: string }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
@@ -76,7 +78,9 @@ export class PostsService {
         id: id,
         title: title,
         content: content,
-        imagePath: image
+        imagePath: image,
+        creator: null,
+        userName: null
       };
     }
     this.http

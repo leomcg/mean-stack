@@ -19,6 +19,6 @@ export class SignupComponent implements OnInit {
     if(signupForm.invalid) {
       return;
     }
-    this.auth.createUser(signupForm.value.email, signupForm.value.password)
+    this.auth.createUser(signupForm.value.email, signupForm.value.name, signupForm.value.password)
   }
 }
