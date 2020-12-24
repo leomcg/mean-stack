@@ -40,6 +40,34 @@ export class PostsService {
       });
   }
 
+  getPostsByCretor(postsPerPage: number, currentPage: number, creator) {
+    const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
+    console.log("http://localhost:3000/api/posts/" + creator + queryParams)
+    this.http
+      .get<{ message: string; posts: any, totalPosts: number }>("http://localhost:3000/api/posts/" + creator + queryParams)
+      .pipe(
+        map(postData => {
+          return {
+            posts: postData.posts.map(post => {
+              return {
+                title: post.title,
+                content: post.content,
+                id: post._id,
+                imagePath: post.imagePath,
+                creator: post.creator,
+                userName: post.userName
+              };
+            }),
+            totalPosts: postData.totalPosts
+          };
+        })
+      )
+      .subscribe(transformedPostsData => {
+        this.posts = transformedPostsData.posts;
+        this.postsUpdated.next({posts: [...this.posts], totalPosts: transformedPostsData.totalPosts});
+      });
+  }
+
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }
@@ -61,6 +89,7 @@ export class PostsService {
         postData
       )
       .subscribe(responseData => {
+        console.log(responseData)
         this.router.navigate(["/"]);
       });
   }

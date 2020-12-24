@@ -6,7 +6,7 @@
         {{ post.title }}
       </div>
       <div class="post-creator">
-        <p>Posted by {{ post.userName }}</p>
+        <p>Posted by <a (click)="getPostsByUser(post.creator, $event)">{{ post.userName }}</a></p>
       </div>
     </mat-expansion-panel-header>
     <div class="post-image">

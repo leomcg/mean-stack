@@ -38,7 +38,6 @@ export class AuthService {
   }
 
   getUserName() {
-    console.log(this.userName)
     return this.userName;
   }
 
@@ -46,7 +45,6 @@ export class AuthService {
     const signupData = {email: email, name: name, password: password};
     this.http.post("http://localhost:3000/api/user/signup", signupData)
       .subscribe(response => {
-        console.log(response)
       });
   }
 
@@ -67,7 +65,6 @@ export class AuthService {
           this.userId = response.userId,
           this.saveAuthData(token, expirationDate, this.userId);
           this.isAuthenticated = true;
-          console.log(this.userName, this.userId)
           this.authStatusListener.next(true);
           this.router.navigate(['/'])
         }

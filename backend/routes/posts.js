@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 
 const Post = require("../models/post");
+const User = require("../models/user");
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
@@ -37,14 +38,13 @@ router.post(
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
+    const user = User.findOne({ _id: req.userData.userId })
     const post = new Post({
       title: req.body.title,
       content: req.body.content,
       imagePath: url + "/images/" + req.file.filename,
       creator: req.userData.userId,
       userName: req.userData.userName,
-      email: req.userData.email,
-      hello: req.hello
     });
     console.log(post)
     post.save().then(createdPost => {
@@ -100,6 +100,32 @@ router.get("", (req, res, next) => {
   };
   postQuery
     .then(documents => {
+      fetchedPosts = documents;
+      return Post.count();
+    })
+    .then(count => {
+      res.status(200).json({
+        message: "Posts fetched successfully!",
+        posts: fetchedPosts,
+        totalPosts: count
+      });
+    });
+
+});
+
+router.get("/:creator", (req, res, next) => {
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const postQuery = Post.find({creator: req.params.creator});
+  let fetchedPosts;
+  if(pageSize && currentPage) {
+    postQuery
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize)
+  };
+  postQuery
+    .then(documents => {
+      console.log(documents)
       fetchedPosts = documents;
       return Post.count();
     })

@@ -11,7 +11,7 @@ import { PostsService } from "../posts.service";
   templateUrl: "./post-list.component.html",
   styleUrls: ["./post-list.component.css"]
 })
-export class PostListComponent implements OnInit, OnDestroy {
+export class PostListComponent implements OnInit, OnDestroy, OnChanges {
   // posts = [
   //   { title: "First Post", content: "This is the first post's content" },
   //   { title: "Second Post", content: "This is the second post's content" },
@@ -49,6 +49,15 @@ export class PostListComponent implements OnInit, OnDestroy {
     })
   }
 
+  ngOnChanges() {
+    this.postsSub = this.postsService.getPostUpdateListener()
+    .subscribe((postsObject: {posts: Post[], totalPosts: number}) => {
+      this.isLoading = false;
+      this.posts = postsObject.posts;
+      this.totalPosts = postsObject.totalPosts;
+    });
+  }
+
   onDelete(postId: string) {
     this.isLoading = true;
     this.postsService.deletePost(postId).subscribe(() => {
@@ -66,5 +75,10 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.currentPage = $event.pageIndex + 1;
     this.postsPerPage = $event.pageSize;
     this.postsService.getPosts(this.postsPerPage, this.currentPage);
+  }
+
+  getPostsByUser(creator, $event) {
+    $event.stopPropagation();
+    this.postsService.getPostsByCretor(this.postsPerPage, this.currentPage, creator);
   }
 }
