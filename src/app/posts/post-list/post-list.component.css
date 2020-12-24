@@ -12,8 +12,36 @@ mat-spinner {
   color: #f1f1f1;
 }
 
+.post-header {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-title {
+  font-size: 20px;
+}
+
+.creator-link {
+  color: #115599;
+}
+
+.creator-link:hover {
+  text-decoration: underline;
+}
+
+.post-content {
+  font-size: 18px;
+}
+
 .post-image {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  padding: 15px;
 }
 
 .post-image img {
