@@ -45,6 +45,7 @@ export class AuthService {
     const signupData = {email: email, name: name, password: password};
     this.http.post("http://localhost:3000/api/user/signup", signupData)
      .subscribe(response => {
+       this.login(email, password);
        this.router.navigate(['/']);
      }, error => {
        this.authStatusListener.next(false);

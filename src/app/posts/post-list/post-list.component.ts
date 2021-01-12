@@ -62,6 +62,8 @@ export class PostListComponent implements OnInit, OnDestroy, OnChanges {
     this.isLoading = true;
     this.postsService.deletePost(postId).subscribe(() => {
       this.postsService.getPosts(this.postsPerPage, this.currentPage)
+    }, () => {
+      this.isLoading = false;
     })
   }
 
@@ -79,6 +81,6 @@ export class PostListComponent implements OnInit, OnDestroy, OnChanges {
 
   getPostsByUser(creator, $event) {
     $event.stopPropagation();
-    this.postsService.getPostsByCretor(this.postsPerPage, this.currentPage, creator);
+    this.postsService.getPostsByCreator(this.postsPerPage, this.currentPage, creator);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth/auth.service";
+import { PostsService } from "../posts/posts.service";
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userName: string;
   userNameSub: Subscription;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private posts: PostsService) {}
 
   ngOnInit() {
     this.userName = this.auth.getUserName();
@@ -32,6 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.auth.logout();
+  }
+
+  fetchPosts() {
+    this.posts.getPosts();
   }
 
 }

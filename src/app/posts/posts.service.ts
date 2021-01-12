@@ -13,7 +13,7 @@ export class PostsService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getPosts(postsPerPage: number, currentPage: number) {
+  getPosts(postsPerPage: number = 5, currentPage: number = 1) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     this.http
       .get<{ message: string; posts: any, totalPosts: number }>("http://localhost:3000/api/posts" + queryParams)
@@ -40,11 +40,10 @@ export class PostsService {
       });
   }
 
-  getPostsByCretor(postsPerPage: number, currentPage: number, creator) {
+  getPostsByCreator(postsPerPage: number, currentPage: number, creator) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
-    console.log("http://localhost:3000/api/posts/" + creator + queryParams)
     this.http
-      .get<{ message: string; posts: any, totalPosts: number }>("http://localhost:3000/api/posts/" + creator + queryParams)
+      .get<{ message: string; posts: any, totalPosts: number }>("http://localhost:3000/api/posts/user/" + creator + queryParams)
       .pipe(
         map(postData => {
           return {
