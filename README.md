@@ -2,7 +2,7 @@
 https://node-angular.vercel.app/
 
 # Technologies Used
-Frontend: Angular 11, Angular Material
+Frontend: Angular 11, Angular Material  
 Backend: Node.js, Express, Mongoose
 
 # Screenshots
