@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: "https://node-angular-leomcg.herokuapp.com/api"
 };
