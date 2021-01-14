@@ -3,7 +3,7 @@ https://node-angular.vercel.app/
 
 # Technologies Used
 Frontend: Angular 11, Angular Material  
-Backend: Node.js, Express, Mongoose
+Backend: Node.js, Express, mongoDB
 
 # Screenshots
 ![Signup](https://github.com/leomcg/mean-stack/blob/main/resources/signup.png?raw=true)
