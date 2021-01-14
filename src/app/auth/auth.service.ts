@@ -6,7 +6,7 @@ import { AuthData } from "./auth-data.model";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
 
-const BACKEND_URL = environment.apiUrl + "/user/";
+const BACKEND_URL = "https://node-angular-leomcg.herokuapp.com/api/user/";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {

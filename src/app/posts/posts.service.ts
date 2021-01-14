@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { environment } from "../../environments/environment"
 import { Post } from "./post.model";
 
-const BACKEND_URL = environment.apiUrl + "/posts/";
+const BACKEND_URL = "https://node-angular-leomcg.herokuapp.com/api/posts/";
 
 @Injectable({ providedIn: "root" })
 export class PostsService {
